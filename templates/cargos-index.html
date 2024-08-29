@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h3>Listar Cargos</h3>
+
+        <!-- Boton agregar -->
+        <div class="row mb-2">
+          <div class="col col-md-4">
+            <a href="{{ url_for('cargos') }}" class="btn btn-danger">Agregar</a>
+          </div>
+        </div>
+        <!--  -->
+
+        <!-- Tabla -->
+        <div class="row">
+            <!-- columna de la mascota -->
+            <div class="col col-md-12">
+
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in lista_cargos %}
+                      <tr>
+                        <td>{{ item['descripcion'] }}</td>
+                        <td>
+                          <div class="row">
+                            <div class="col col-md-2">
+                              <a href="{{ url_for('cargosEditar', id=item['id']) }}" class="btn btn-danger">Editar</a>
+                            </div>
+                            <div class="col col-md-2">
+                              <a href="{{ url_for('cargosEliminar', id=item['id']) }}" class="btn btn-danger">Eliminar</a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <!--  -->
+        </div>
+        <!--  -->
+
+        <div class="row mt-4 d-none" id="rowAlerta">
+            <div class="col col-md-12">
+                <div class="alert alert-success">
+                    <strong>Registro Exitoso!</strong>
+                    <div class="row" id="mostrarAlerta"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
